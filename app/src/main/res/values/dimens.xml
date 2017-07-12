@@ -1,0 +1,19 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="edge_image">75dp</dimen>
+    <dimen name="padding_top_1">5dp</dimen>
+    <dimen name="padding_top_2">15dp</dimen>
+    <dimen name="padding_top_3">30dp</dimen>
+    <dimen name="common_5">5dp</dimen>
+    <dimen name="common_10">10dp</dimen>
+    <dimen name="common_10_sp">10sp</dimen>
+    <dimen name="common_12">12dp</dimen>
+    <dimen name="common_14">14dp</dimen>
+    <dimen name="common_16">16dp</dimen>
+    <dimen name="common_20">20dp</dimen>
+    <dimen name="common_20_sp">20sp</dimen>
+    <dimen name="common_15_sp">15sp</dimen>
+    <dimen name="height_list">120dp</dimen>
+
+
+</resources>
