@@ -1,17 +1,21 @@
 package com.felipe.app.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.felipe.app.BaseActivity;
+import com.felipe.app.DetailActivityFragment;
 import com.felipe.app.R;
 
 /**
  * Created by felipe on 7/12/17.
  */
 
-public class FruitViewHolder extends RecyclerView.ViewHolder {
+public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     private TextView txtName;
     private TextView txtPrice;
@@ -19,6 +23,7 @@ public class FruitViewHolder extends RecyclerView.ViewHolder {
 
     public FruitViewHolder(View itemView) {
         super(itemView);
+        itemView.setOnClickListener(this);
         config();
     }
 
@@ -26,6 +31,7 @@ public class FruitViewHolder extends RecyclerView.ViewHolder {
         configWidgets(R.id.txt_name, itemView);
         configWidgets(R.id.txt_price, itemView);
         configWidgets(R.id.img_fruit_image, itemView);
+
     }
 
     private void configWidgets(final int vid, View v) {
@@ -64,5 +70,13 @@ public class FruitViewHolder extends RecyclerView.ViewHolder {
 
     public void setnImg(ImageView nImg) {
         this.nImg = nImg;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.e("MUXI", "onClick " + getPosition());
+        BaseActivity myActivity = (BaseActivity) v.getContext();
+        myActivity.getSupportFragmentManager();
+
     }
 }
