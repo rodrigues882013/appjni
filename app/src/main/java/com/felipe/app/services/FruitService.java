@@ -1,8 +1,6 @@
 package com.felipe.app.services;
 
-import com.felipe.app.models.Fruit;
-
-import java.util.List;
+import com.felipe.app.models.FruitsJSON;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,6 +11,6 @@ import retrofit2.http.GET;
 
 public interface FruitService {
 
-    @GET("/fruits.json")
-    Call<List<Fruit>>listFruits();
+    @GET("fruits.json")
+    Call<FruitsJSON>listFruits();
 }

@@ -2,6 +2,7 @@ package com.felipe.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,39 +27,20 @@ public class FruitAdapter extends CustomAdapter<Fruit> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup){
-        Fruit f = items.get(position);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(this.activity).inflate(R.layout.card_fruit, parent, false);
+        return new FruitViewHolder(v);
+    }
 
-        if (inflater == null) {
-            inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.card_fruit, null);
-        }
+        FruitViewHolder holder = (FruitViewHolder) viewHolder;
+        Fruit f  = (Fruit) this.items.get(position) ;
 
-        //Get Image
-        ImageView imgLocal = (ImageView) convertView.findViewById(R.id.img_fruit_image);
-        Picasso.with(activity).load(f.getImage()).into(imgLocal);
-
-//      imgLocal.setImageUrl(c.getImage(), AppController.getInstance(activity).getImageLoader());
-
-        //Get Texts
-        TextView txtTitle = (TextView) convertView.findViewById(R.id.txt_fruit_name);
-        String packageName = f.getName();
-        if (packageName != null) {
-            txtTitle.setText(packageName);
-        }
-
-        TextView txtPrice = (TextView) convertView.findViewById(R.id.txt_fruit_price);
-        Double price = f.getPrice();
-        if (packageName != null) {
-            txtPrice.setText(String.format(Locale.UK, "%f", price));
-        }
-
-        return convertView;
-
-
+        holder.getTxtName().setText(f.getName());
+        holder.getTxtPrice().setText(String.format(Locale.UK, "R$ " + "%,.2f",  f.getPrice()));
+        Picasso.with(activity).load(f.getImage()).into(holder.getnImg());
 
     }
 }

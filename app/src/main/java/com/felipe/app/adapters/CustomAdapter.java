@@ -1,6 +1,7 @@
 package com.felipe.app.adapters;
 
 import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import java.util.List;
 
 
 
-abstract class CustomAdapter<T> extends BaseAdapter {
+abstract class CustomAdapter<T> extends RecyclerView.Adapter {
 
     protected List<T> items;
     protected Activity activity;
@@ -27,38 +28,26 @@ abstract class CustomAdapter<T> extends BaseAdapter {
         this.activity = activity;
 
         int idx = 0;
-        for (T t : items){
+        for (T t : items) {
             this.mIdMap.put(t, idx++);
         }
-
-    }
-    @Override
-    public int getCount() {
-        return this.items.size();
     }
 
     @Override
-    public T getItem(int position) {
-        return this.items.get(position) ;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        if (position < 0 || position >= mIdMap.size()) {
-            return -1;
-        }
-        T item = getItem(position);
-        return mIdMap.get(item);
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return android.os.Build.VERSION.SDK_INT < 21;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup){
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;
+    }
+
+
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return this.items.size();
     }
 
 }
