@@ -40,7 +40,7 @@ public class FruitAdapter extends CustomAdapter<Fruit> {
 
         holder.getTxtName().setText(f.getName());
         holder.getTxtPrice().setText(String.format(Locale.UK, "R$ " + "%,.2f",  f.getPrice()));
-        Picasso.with(activity).load(f.getImage()).into(holder.getnImg());
+        //Picasso.with(activity).load(f.getImage()).into(holder.getnImg());
 
     }
 }

@@ -1,24 +1,17 @@
 package com.felipe.app;
 
-import android.app.ListFragment;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.felipe.app.adapters.FruitAdapter;
 import com.felipe.app.models.Fruit;
 import com.felipe.app.models.FruitsJSON;
-import com.felipe.app.services.APIClient;
+import com.felipe.app.services.EndPointManager;
 import com.felipe.app.services.FruitService;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +24,7 @@ import retrofit2.Retrofit;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FruitsActivityFragment extends Fragment {
+public class FruitsActivity extends BaseActivity {
 
     private List<Fruit> fruits;
     private FruitAdapter fAdapter;
@@ -40,18 +33,13 @@ public class FruitsActivityFragment extends Fragment {
     private CoordinatorLayout coordinatorLayout;
 
 
-    public FruitsActivityFragment() {
+    public FruitsActivity() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_fruits_list, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fruits);
         onConfigure();
         getFruits();
 
@@ -59,7 +47,7 @@ public class FruitsActivityFragment extends Fragment {
 
     public void getFruits(){
         Log.e("MUXI", "getFruits");
-        Retrofit instance = APIClient.getInstance();
+        Retrofit instance = EndPointManager.getInstance();
         FruitService service = instance.create(FruitService.class);
         Call<FruitsJSON> call = service.listFruits();
 
@@ -80,12 +68,15 @@ public class FruitsActivityFragment extends Fragment {
     }
 
     public void onConfigure(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         fruits = new ArrayList<Fruit>();
-        coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.activity_base);
-        fruitList = (RecyclerView) getActivity().findViewById(R.id.recycler);
-        layout = new LinearLayoutManager(getActivity());
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.activity_base);
+        fruitList = (RecyclerView) findViewById(R.id.recycler);
+        layout = new LinearLayoutManager(this);
         fruitList.setLayoutManager(layout);
-        fAdapter = new FruitAdapter(getActivity(), fruits);
+        fAdapter = new FruitAdapter(this, fruits);
         fruitList.setAdapter(fAdapter);
     }
 

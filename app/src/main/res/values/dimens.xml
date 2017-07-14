@@ -1,6 +1,9 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="edge_image">75dp</dimen>
+    <dimen name="edge_image">150dp</dimen>
+    <dimen name="edge_list">75dp</dimen>
+    <dimen name="edge_card_width">350dp</dimen>
+    <dimen name="edge_card_height">200dp</dimen>
     <dimen name="padding_top_1">5dp</dimen>
     <dimen name="padding_top_2">15dp</dimen>
     <dimen name="padding_top_3">30dp</dimen>

@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.felipe.app.BaseActivity;
-import com.felipe.app.DetailActivityFragment;
+import com.felipe.app.FruitDetailActivity;
+import com.felipe.app.FruitsActivity;
 import com.felipe.app.R;
 
 /**
@@ -30,7 +30,7 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
     private void config(){
         configWidgets(R.id.txt_name, itemView);
         configWidgets(R.id.txt_price, itemView);
-        configWidgets(R.id.img_fruit_image, itemView);
+        //configWidgets(R.id.img_fruit_image, itemView);
 
     }
 
@@ -75,8 +75,10 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
     @Override
     public void onClick(View v) {
         Log.e("MUXI", "onClick " + getPosition());
-        BaseActivity myActivity = (BaseActivity) v.getContext();
-        myActivity.getSupportFragmentManager();
-
+        FruitsActivity fActivity = (FruitsActivity) v.getContext();
+        Intent intent = new Intent(fActivity, FruitDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        fActivity.startActivity(intent);
     }
 }

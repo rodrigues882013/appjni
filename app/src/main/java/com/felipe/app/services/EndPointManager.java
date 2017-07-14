@@ -9,11 +9,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by felipe on 7/11/17.
  */
 
-public class APIClient {
+public class EndPointManager {
 
     private static Retrofit instance;
 
-    private APIClient(){}
+    private EndPointManager(){}
 
     public static Retrofit getInstance(){
         if (instance == null){
