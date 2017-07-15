@@ -1,12 +1,24 @@
 package com.felipe.app.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by felipe on 7/11/17.
  */
 
 public class Fruit {
+    @SerializedName("name")
+    @Expose
     private String name;
+
+
+    @SerializedName("image")
+    @Expose
     private String image;
+
+    @SerializedName("price")
+    @Expose
     private Double price;
 
     public Fruit(String name, String image, Double price) {

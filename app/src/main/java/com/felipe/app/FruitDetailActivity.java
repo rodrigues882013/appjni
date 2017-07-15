@@ -28,7 +28,7 @@ public class FruitDetailActivity extends BaseActivity {
     }
 
     public void onConfigure(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         
         configWidgets(R.id.txt_info_name);

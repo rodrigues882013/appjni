@@ -11,6 +11,8 @@ import android.view.MenuItem;
 
 public class BaseActivity extends AppCompatActivity {
 
+    protected Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

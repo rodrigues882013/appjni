@@ -1,5 +1,8 @@
 package com.felipe.app.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +11,9 @@ import java.util.List;
  */
 
 public class FruitsJSON {
-    private List<Fruit> fruits = new ArrayList<Fruit>();
+    @SerializedName("fruits")
+    @Expose
+    private List<Fruit> fruits = null;
 
     public List<Fruit> getFruits() {
         return fruits;

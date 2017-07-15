@@ -3,6 +3,7 @@ package com.felipe.app.services;
 import com.felipe.app.Utils.Utils;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -19,8 +20,9 @@ public class EndPointManager {
         if (instance == null){
 
             instance = new Retrofit.Builder()
-                    .baseUrl(Utils.API_URL)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl(Utils.API_URL)
                     .build();
         }
         return instance;

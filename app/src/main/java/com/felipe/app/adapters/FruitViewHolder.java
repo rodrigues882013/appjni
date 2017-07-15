@@ -32,6 +32,7 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
         configWidgets(R.id.txt_price, itemView);
         //configWidgets(R.id.img_fruit_image, itemView);
 
+
     }
 
     private void configWidgets(final int vid, View v) {

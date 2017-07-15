@@ -2,6 +2,7 @@ package com.felipe.app.services;
 
 import com.felipe.app.models.FruitsJSON;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -12,5 +13,5 @@ import retrofit2.http.GET;
 public interface FruitService {
 
     @GET("fruits.json")
-    Call<FruitsJSON>listFruits();
+    Observable<FruitsJSON> listFruits();
 }

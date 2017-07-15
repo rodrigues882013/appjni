@@ -16,6 +16,10 @@ import com.felipe.app.services.FruitService;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,29 +50,22 @@ public class FruitsActivity extends BaseActivity {
     }
 
     public void getFruits(){
-        Log.e("MUXI", "getFruits");
         Retrofit instance = EndPointManager.getInstance();
         FruitService service = instance.create(FruitService.class);
-        Call<FruitsJSON> call = service.listFruits();
+        Observable<FruitsJSON> fruitsObservable = service.listFruits();
 
-        call.enqueue(new Callback<FruitsJSON>() {
-            @Override
-            public void onResponse(Call<FruitsJSON> call, Response<FruitsJSON> response) {
-                FruitsJSON result = response.body();
-                fruits.addAll(result.getFruits());
-                fAdapter.notifyDataSetChanged();
+        fruitsObservable
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    fruits.addAll(result.getFruits());
+                    fAdapter.notifyDataSetChanged();
+                });
 
-            }
-
-            @Override
-            public void onFailure(Call<FruitsJSON> call, Throwable t) {
-                Log.e("MUXI", t.getMessage());
-            }
-        });
     }
 
     public void onConfigure(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         fruits = new ArrayList<Fruit>();
