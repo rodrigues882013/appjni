@@ -1,9 +1,9 @@
-package com.felipe.app.models;
+package com.felipe.app.models.schemas;
 
+import com.felipe.app.models.pojos.Fruit;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

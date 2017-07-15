@@ -1,4 +1,4 @@
-package com.felipe.app.models;
+package com.felipe.app.models.pojos;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

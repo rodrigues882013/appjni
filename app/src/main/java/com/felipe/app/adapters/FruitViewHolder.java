@@ -2,7 +2,6 @@ package com.felipe.app.adapters;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +9,9 @@ import android.widget.TextView;
 import com.felipe.app.FruitDetailActivity;
 import com.felipe.app.FruitsActivity;
 import com.felipe.app.R;
+import com.felipe.app.models.pojos.Fruit;
+
+import java.util.ArrayList;
 
 /**
  * Created by felipe on 7/12/17.
@@ -20,6 +22,7 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
     private TextView txtName;
     private TextView txtPrice;
     private ImageView nImg;
+    private CustomAdapter<Fruit> adapter;
 
     public FruitViewHolder(View itemView) {
         super(itemView);
@@ -30,9 +33,6 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
     private void config(){
         configWidgets(R.id.txt_name, itemView);
         configWidgets(R.id.txt_price, itemView);
-        //configWidgets(R.id.img_fruit_image, itemView);
-
-
     }
 
     private void configWidgets(final int vid, View v) {
@@ -53,33 +53,25 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
         return txtName;
     }
 
-    public void setTxtName(TextView txtName) {
-        this.txtName = txtName;
-    }
-
     public TextView getTxtPrice() {
         return txtPrice;
     }
 
-    public void setTxtPrice(TextView txtPrice) {
-        this.txtPrice = txtPrice;
-    }
-
-    public ImageView getnImg() {
-        return nImg;
-    }
-
-    public void setnImg(ImageView nImg) {
-        this.nImg = nImg;
+    public void setAdapter(CustomAdapter<Fruit> adapter){
+        this.adapter = adapter;
     }
 
     @Override
     public void onClick(View v) {
-        Log.e("MUXI", "onClick " + getPosition());
-        FruitsActivity fActivity = (FruitsActivity) v.getContext();
-        Intent intent = new Intent(fActivity, FruitDetailActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("EXIT", true);
-        fActivity.startActivity(intent);
+
+        Fruit fruit = ((ArrayList<Fruit>) itemView.getTag()).get(getAdapterPosition());
+
+        FruitsActivity activity = (FruitsActivity) v.getContext();
+        Intent intent = new Intent(activity, FruitDetailActivity.class);
+
+        intent.putExtra("fruitName", fruit.getName());
+        intent.putExtra("fruitPrice", fruit.getPrice());
+        intent.putExtra("fruitImage", fruit.getImage());
+        activity.startActivity(intent);
     }
 }

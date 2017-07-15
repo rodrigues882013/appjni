@@ -1,9 +1,8 @@
 package com.felipe.app.services;
 
-import com.felipe.app.models.FruitsJSON;
+import com.felipe.app.models.schemas.FruitsJSON;
 
 import io.reactivex.Observable;
-import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
