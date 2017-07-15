@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.felipe.app.adapters.FruitAdapter;
 import com.felipe.app.models.pojos.Fruit;
@@ -27,6 +29,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
     private List<Fruit> fruits;
     private FruitAdapter fAdapter;
     private RecyclerView fruitList;
+    private ProgressBar progBarSm;
 
 
     public FruitsActivity() {
@@ -42,6 +45,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
     }
 
     public void getFruits(){
+        changeProgressBar();
         Retrofit instance = EndPointManager.getInstance();
         FruitService service = instance.create(FruitService.class);
         Observable<FruitsJSON> fruitsObservable = service.listFruits();
@@ -52,15 +56,15 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
                 .subscribe(result -> {
                     fruits.addAll(result.getFruits());
                     fAdapter.notifyDataSetChanged();
+                    changeProgressBar();
                 });
 
     }
 
     @Override
     public void onConfigure(){
-        configWidgets(R.id.activity_base);
         configWidgets(R.id.recycler);
-
+        configWidgets(R.id.pb_progress_small);
         configureToolbar();
 
         fruits = new ArrayList<Fruit>();
@@ -77,6 +81,10 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
             case R.id.recycler:
                 fruitList = (RecyclerView) findViewById(vid);
                 break;
+
+            case R.id.pb_progress_small:
+                progBarSm = (ProgressBar) findViewById(vid);
+                break;
         }
 
     }
@@ -85,6 +93,15 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
     public void configureToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    protected void changeProgressBar(){
+        if (progBarSm.getVisibility() == View.INVISIBLE){
+            progBarSm.setVisibility(View.VISIBLE);
+
+        } else {
+            progBarSm.setVisibility(View.INVISIBLE);
+        }
     }
 
 
