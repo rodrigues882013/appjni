@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import com.felipe.app.adapters.FruitAdapter;
 import com.felipe.app.models.pojos.Fruit;
 import com.felipe.app.models.schemas.FruitsJSON;
-import com.felipe.app.services.EndPointManager;
+import com.felipe.app.services.RestClient;
 import com.felipe.app.services.FruitService;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
 
     public void getFruits(){
         changeProgressBar();
-        Retrofit instance = EndPointManager.getInstance();
+        Retrofit instance = RestClient.getInstance();
         FruitService service = instance.create(FruitService.class);
         Observable<FruitsJSON> fruitsObservable = service.listFruits();
 

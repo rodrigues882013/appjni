@@ -10,11 +10,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by felipe on 7/11/17.
  */
 
-public class EndPointManager {
+public class RestClient {
 
     private static Retrofit instance;
 
-    private EndPointManager(){}
+    private RestClient(){}
 
     public static Retrofit getInstance(){
         if (instance == null){
