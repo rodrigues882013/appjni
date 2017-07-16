@@ -1,8 +1,7 @@
 package com.felipe.app;
 
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.os.PersistableBundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,16 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.felipe.app.adapters.FruitAdapter;
+import com.felipe.app.helpers.ProccessValueListener;
 import com.felipe.app.models.pojos.Fruit;
 import com.felipe.app.models.schemas.FruitsJSON;
 import com.felipe.app.services.FruitService;
 import com.felipe.app.services.NativeAPI;
-import com.felipe.app.helpers.ProccessValueListener;
 import com.felipe.app.utils.Utils;
-import com.google.common.base.Preconditions;
-
-import org.reactivestreams.Subscription;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,27 +25,21 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-//import com.felipe.app.services.NativeAPI;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class FruitsActivity extends BaseActivity implements ActivityAction,
-        ProccessValueListener {
+        ProccessValueListener, SwipeRefreshLayout.OnRefreshListener {
 
     private List<Fruit> fruits;
     private FruitAdapter fAdapter;
     private RecyclerView fruitList;
     private ProgressBar progBarSm;
     private Disposable subscription;
+    private SwipeRefreshLayout refreshLayout;
 
     @Inject
     @Named("native")
@@ -79,6 +68,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
     public void onConfigure(){
         configWidgets(R.id.recycler);
         configWidgets(R.id.pb_progress_small);
+        configWidgets(R.id.refresh);
         configureToolbar();
 
         fruits = new ArrayList<Fruit>();
@@ -98,6 +88,11 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
 
             case R.id.pb_progress_small:
                 progBarSm = (ProgressBar) findViewById(vid);
+                break;
+
+            case R.id.refresh:
+                refreshLayout = (SwipeRefreshLayout) findViewById(vid);
+                refreshLayout.setOnRefreshListener(this);
                 break;
         }
 
@@ -154,20 +149,27 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
                             }
                             fAdapter.notifyDataSetChanged();
                             changeProgressBar();
+                            refreshLayout.setRefreshing(false);
                         },
                         error -> {
                             Utils.onErrorHandler(this, error.toString());
                             TextView tv = (TextView) findViewById(R.id.no_data);
                             tv.setVisibility(View.VISIBLE);
                             changeProgressBar();
+                            refreshLayout.setRefreshing(false);
                         }
                 );
     }
 
 
-    protected void changeProgressBar(){
+    protected void changeProgressBar(){                                                                                                                                                                                                 
         progBarSm.setVisibility(View.GONE);
     }
 
 
+    @Override
+    public void onRefresh() {
+        refreshLayout.setRefreshing(true);
+        getFruits();
+    }
 }
