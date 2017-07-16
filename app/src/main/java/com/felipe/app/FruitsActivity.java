@@ -63,6 +63,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.e("MUXI", "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fruits);
 
@@ -121,12 +122,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (fruits.isEmpty()){
-            TextView tv = (TextView) findViewById(R.id.no_data);
-            tv.setVisibility(View.GONE);
-            getFruits();
-        }
+        fAdapter.notifyDataSetChanged();
 
     }
 
@@ -140,7 +136,6 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
     }
 
     public void getFruits(){
-        changeProgressBar();
 
         FruitService service = retrofitInstance.create(FruitService.class);
         Observable<FruitsJSON> fruitsObservable = service.listFruits();
@@ -171,11 +166,8 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
 
 
     protected void changeProgressBar(){
-        if (progBarSm.getVisibility() == View.INVISIBLE){
-            progBarSm.setVisibility(View.VISIBLE);
-
-        } else {
-            progBarSm.setVisibility(View.INVISIBLE);
-        }
+        progBarSm.setVisibility(View.GONE);
     }
+
+
 }

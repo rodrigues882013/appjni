@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -77,15 +78,16 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable("fruits", fruit);
-        super.onSaveInstanceState(outState);
-    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        fruit = savedInstanceState.getParcelable("fruit");
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+
     }
 
     public Fruit getFruit(){

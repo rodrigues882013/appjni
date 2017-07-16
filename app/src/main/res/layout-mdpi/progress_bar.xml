@@ -5,5 +5,4 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_gravity="center"
-    android:visibility="invisible"
     xmlns:android="http://schemas.android.com/apk/res/android" />
