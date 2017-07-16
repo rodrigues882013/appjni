@@ -1,4 +1,4 @@
-package com.felipe.app.Utils;
+package com.felipe.app.utils;
 
 /**
  * Created by felipe on 7/11/17.

@@ -10,11 +10,16 @@ import android.widget.ProgressBar;
 import com.felipe.app.adapters.FruitAdapter;
 import com.felipe.app.models.pojos.Fruit;
 import com.felipe.app.models.schemas.FruitsJSON;
+//import com.felipe.app.services.NativeClient;
+import com.felipe.app.services.NativeClient;
 import com.felipe.app.services.RestClient;
 import com.felipe.app.services.FruitService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,6 +36,14 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
     private RecyclerView fruitList;
     private ProgressBar progBarSm;
 
+    @Inject
+    @Named("native")
+    NativeClient nativeInstance;
+
+    @Inject
+    @Named("retrofit")
+    Retrofit retrofitInstance;
+
 
     public FruitsActivity() {
     }
@@ -39,6 +52,10 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fruits);
+
+        ((CustomApplication)getApplication()).getNetworkComponent().inject(this);
+        //((CustomApplication)getApplication()).getNativeComponent().inject(this);
+
         onConfigure();
         getFruits();
 
@@ -46,15 +63,18 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
 
     public void getFruits(){
         changeProgressBar();
-        Retrofit instance = RestClient.getInstance();
-        FruitService service = instance.create(FruitService.class);
+        FruitService service = retrofitInstance.create(FruitService.class);
         Observable<FruitsJSON> fruitsObservable = service.listFruits();
 
         fruitsObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
-                    fruits.addAll(result.getFruits());
+                    for (Fruit f: result.getFruits()){
+                        nativeInstance.asyncConvertToReal(f.getPrice());
+//                        f.setPrice(realPrice);
+                        fruits.add(f);
+                    }
                     fAdapter.notifyDataSetChanged();
                     changeProgressBar();
                 });
