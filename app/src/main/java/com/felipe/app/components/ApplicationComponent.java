@@ -1,5 +1,7 @@
 package com.felipe.app.components;
 
+import android.content.Context;
+
 import com.felipe.app.FruitsActivity;
 import com.felipe.app.adapters.FruitAdapter;
 import com.felipe.app.adapters.FruitViewHolder;
@@ -17,5 +19,4 @@ import dagger.Component;
 @Component( modules = { ApplicationModule.class })
 public interface ApplicationComponent {
     void inject(FruitsActivity activity);
-    void inject(FruitAdapter adapter);
 }
