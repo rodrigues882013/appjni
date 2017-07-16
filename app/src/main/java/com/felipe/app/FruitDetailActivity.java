@@ -3,12 +3,14 @@ package com.felipe.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.felipe.app.models.pojos.Fruit;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -18,9 +20,6 @@ import java.util.Locale;
 public class FruitDetailActivity extends BaseActivity implements ActivityAction {
 
     private Fruit fruit;
-
-    public FruitDetailActivity() {
-    }
 
 
     @Override
@@ -37,6 +36,7 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
         configureToolbar();
         configWidgets(R.id.txt_info_name);
         configWidgets(R.id.txt_info_price);
+        configWidgets(R.id.txt_info_price_real);
         configWidgets(R.id.img_fruit_image);
     }
 
@@ -58,9 +58,15 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
                 TextView txtName = (TextView) findViewById(vid);
                 txtName.setText(fruit.getName());
                 break;
+
             case R.id.txt_info_price:
                 TextView txtPrice = (TextView) findViewById(vid);
                 txtPrice.setText(String.format(Locale.UK, "U$ " + "%,.2f",  fruit.getPrice()));
+                break;
+
+            case R.id.txt_info_price_real:
+                TextView txtPriceReal = (TextView) findViewById(vid);
+                txtPriceReal.setText(String.format(Locale.UK, "R$ " + "%,.2f",  fruit.getPriceReal()));
                 break;
 
             case R.id.img_fruit_image:
@@ -68,6 +74,18 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
                 Picasso.with(this).load(fruit.getImage()).into(nImg);
                 break;
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable("fruits", fruit);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        fruit = savedInstanceState.getParcelable("fruit");
     }
 
     public Fruit getFruit(){
@@ -78,6 +96,7 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
         fruit.setName(extra.getString("name"));
         fruit.setImage(extra.getString("image"));
         fruit.setPrice(extra.getDouble("price"));
+        fruit.setPriceReal(extra.getDouble("priceReal"));
 
         return fruit;
     }

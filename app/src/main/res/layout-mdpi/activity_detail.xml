@@ -52,6 +52,14 @@
                     android:text="asdsadsasd"
                     android:textAppearance="@android:style/TextAppearance.Holo.Small" />
 
+                <TextView
+                    android:id="@+id/txt_info_price_real"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="asdsadsasd"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Small" />
+
+
             </LinearLayout>
 
 

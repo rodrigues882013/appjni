@@ -34,7 +34,7 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
     private void config(){
         configWidgets(R.id.txt_name, itemView);
         configWidgets(R.id.txt_price_dollar, itemView);
-        configWidgets(R.id.txt_price_real, itemView);
+        configWidgets(R.id.img_fruit_image_list, itemView);
     }
 
     private void configWidgets(final int vid, View v) {
@@ -45,10 +45,7 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
             case R.id.txt_price_dollar:
                 txtPriceDollar = (TextView) v.findViewById(vid);
                 break;
-            case R.id.txt_price_real:
-                txtPriceReal = (TextView) v.findViewById(vid);
-                break;
-            case R.id.img_fruit_image:
+            case R.id.img_fruit_image_list:
                 nImg = (ImageView) v.findViewById(vid);
                 break;
         }
@@ -66,6 +63,14 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
         return txtPriceReal;
     }
 
+
+    public ImageView getnImg() {
+        return nImg;
+    }
+
+    public void setnImg(ImageView nImg) {
+        this.nImg = nImg;
+    }
 
     public void setAdapter(CustomAdapter<Fruit> adapter){
         this.adapter = adapter;

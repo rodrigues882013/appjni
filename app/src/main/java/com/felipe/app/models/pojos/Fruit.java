@@ -1,13 +1,18 @@
 package com.felipe.app.models.pojos;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Locale;
 
 /**
  * Created by felipe on 7/11/17.
  */
 
-public class Fruit {
+public class Fruit implements Parcelable{
     @SerializedName("name")
     @Expose
     private String name;
@@ -31,6 +36,25 @@ public class Fruit {
 
     public Fruit() {
     }
+
+    protected Fruit(Parcel in) {
+        name = in.readString();
+        image = in.readString();
+        price = Double.parseDouble(in.readString());
+        priceReal = Double.parseDouble(in.readString());
+    }
+
+    public static final Creator<Fruit> CREATOR = new Creator<Fruit>() {
+        @Override
+        public Fruit createFromParcel(Parcel in) {
+            return new Fruit(in);
+        }
+
+        @Override
+        public Fruit[] newArray(int size) {
+            return new Fruit[size];
+        }
+    };
 
     public Double getPriceReal() {
         return priceReal;
@@ -78,5 +102,18 @@ public class Fruit {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(image);
+        dest.writeString(String.format(Locale.UK, "%f", price));
+        dest.writeString(String.format(Locale.UK, "%f", priceReal));
     }
 }

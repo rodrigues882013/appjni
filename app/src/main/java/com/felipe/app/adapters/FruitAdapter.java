@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.felipe.app.R;
 import com.felipe.app.models.pojos.Fruit;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Locale;
@@ -24,6 +25,7 @@ public class FruitAdapter extends CustomAdapter<Fruit>{
     public FruitAdapter(Activity activity, List<Fruit> items) {
         super(activity, items);
         this.items = items;
+        setHasStableIds(true);
     }
 
     @Override
@@ -40,8 +42,18 @@ public class FruitAdapter extends CustomAdapter<Fruit>{
         Fruit f  = (Fruit) this.items.get(position);
 
         holder.getTxtName().setText(f.getName());
+        Picasso.with(activity).load(f.getImage()).into(holder.getnImg());
         holder.getTxtPriceDollar().setText(String.format(Locale.UK, "U$ " + "%,.2f",  f.getPrice()));
-        holder.getTxtPriceReal().setText(String.format(Locale.UK, "R$ " + "%,.2f",  f.getPriceReal()));
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
 

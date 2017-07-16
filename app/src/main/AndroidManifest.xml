@@ -21,6 +21,7 @@
         </activity>
 
         <activity android:name=".FruitsActivity"
+            android:configChanges="screenSize|orientation|screenLayout"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
@@ -30,6 +31,7 @@
         </activity>
 
         <activity android:name=".FruitDetailActivity"
+            android:configChanges="screenSize|orientation|screenLayout"
             android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data

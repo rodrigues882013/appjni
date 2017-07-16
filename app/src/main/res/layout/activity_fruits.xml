@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:textSize="@dimen/common_40_sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textColor="@color/fade_grey"
+        android:text="No data available"/>
 
     <include layout="@layout/progress_bar" />
 
     <include layout="@layout/action_bar" />
+
+
 
     <android.support.v7.widget.RecyclerView
         android:background="@color/viewBg"
@@ -19,4 +35,5 @@
         app:layout_behavior = "@string/appbar_scrolling_view_behavior" />
 
 
-</RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

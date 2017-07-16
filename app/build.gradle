@@ -72,6 +72,8 @@ dependencies {
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'com.google.code.findbugs:jsr305:3.0.2'
 
+    //Guava
+    compile 'com.google.guava:guava:22.0-android'
 
     testCompile 'junit:junit:4.12'
 }

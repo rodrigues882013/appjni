@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.felipe.app.BaseActivity;
+import com.felipe.app.utils.Utils;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -37,7 +38,7 @@ public class NativeAPI {
     public native void asyncConvertToReal(double num, int pos);
 
     public void nativeCallBack(double convertedValue){
-        Log.d("MUXI", String.format(Locale.UK, "%f", convertedValue));
+        Log.i(Utils.MUXI_TAG, "Callback from native");
         ((BaseActivity) ctx).onCalculeComplete(convertedValue, position);
     }
 

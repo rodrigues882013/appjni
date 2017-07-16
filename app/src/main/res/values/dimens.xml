@@ -1,6 +1,7 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="edge_image">150dp</dimen>
+    <dimen name="edge_image_list">50dp</dimen>
     <dimen name="edge_list">75dp</dimen>
 
     <dimen name="edge_card_width">350dp</dimen>
@@ -18,6 +19,8 @@
     <dimen name="common_14">14dp</dimen>
     <dimen name="common_16">16dp</dimen>
     <dimen name="common_20">20dp</dimen>
+    <dimen name="common_50_sp">50sp</dimen>
+    <dimen name="common_40_sp">40sp</dimen>
     <dimen name="common_20_sp">20sp</dimen>
     <dimen name="common_15_sp">15sp</dimen>
     <dimen name="height_list">120dp</dimen>
