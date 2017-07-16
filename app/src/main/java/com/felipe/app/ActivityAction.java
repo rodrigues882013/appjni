@@ -5,6 +5,10 @@ package com.felipe.app;
  */
 
 interface ActivityAction {
+
+    /*
+    *  Simple activity contract
+    * */
     void onConfigure();
     void configWidgets(int vid);
     void configureToolbar();

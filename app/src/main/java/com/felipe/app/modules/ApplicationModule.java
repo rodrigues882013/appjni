@@ -19,6 +19,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ApplicationModule {
 
+    /**
+     * Dagger 2 module
+     * */
     public ApplicationModule() {
     }
 
@@ -26,6 +29,9 @@ public class ApplicationModule {
     @Named("retrofit")
     @Singleton
     Retrofit provideRetrofit(){
+        /*
+        * Retrofit provide
+        * */
         return new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -37,6 +43,9 @@ public class ApplicationModule {
     @Named("native")
     @Singleton
     NativeAPI provideNative(){
+        /*
+        * NativeAPI provide
+        * */
         return new NativeAPI();
     }
 

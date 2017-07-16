@@ -52,7 +52,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.e("MUXI", "onCreate");
+        Log.i(Utils.MUXI_TAG, "Creating Fruits Activity (fruits list)");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fruits);
 
@@ -66,6 +66,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
 
     @Override
     public void onConfigure(){
+        Log.i(Utils.MUXI_TAG, "Configure Activity");
         configWidgets(R.id.recycler);
         configWidgets(R.id.pb_progress_small);
         configWidgets(R.id.refresh);
@@ -80,7 +81,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
 
     @Override
     public void configWidgets(int vid) {
-
+        Log.i(Utils.MUXI_TAG, "Configure widgets");
         switch (vid){
             case R.id.recycler:
                 fruitList = (RecyclerView) findViewById(vid);
@@ -100,6 +101,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
 
     @Override
     public void configureToolbar(){
+        Log.i(Utils.MUXI_TAG, "Configure toolbar");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -107,6 +109,7 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
 
     @Override
     public void onCalculeComplete(double result, int position) {
+        Log.i(Utils.MUXI_TAG, "Price was calculated from native code");
         Fruit f = fruits.get(position);
         f.setPriceReal(result);
         fruits.set(position, f);
@@ -125,12 +128,14 @@ public class FruitsActivity extends BaseActivity implements ActivityAction,
     protected void onDestroy() {
         super.onDestroy();
 
+        // Release resources to avoid memory leaks
         if (subscription != null && !subscription.isDisposed()){
             subscription.dispose();
         }
     }
 
     public void getFruits(){
+        Log.i(Utils.MUXI_TAG, "Retrieve fruits list from API");
 
         FruitService service = retrofitInstance.create(FruitService.class);
         Observable<FruitsJSON> fruitsObservable = service.listFruits();

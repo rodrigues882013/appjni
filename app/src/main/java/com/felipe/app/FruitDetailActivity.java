@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.felipe.app.models.pojos.Fruit;
+import com.felipe.app.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.i(Utils.MUXI_TAG, "Creating Fruit Detail Activity");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         fruit = getFruit();
@@ -33,6 +36,7 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
 
     @Override
     public void onConfigure(){
+        Log.i(Utils.MUXI_TAG, "Configure activity");
 
         configureToolbar();
         configWidgets(R.id.txt_info_name);
@@ -43,6 +47,8 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
 
     @Override
     public void configureToolbar(){
+        Log.i(Utils.MUXI_TAG, "Configure toolbar");
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,6 +59,8 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
 
     @Override
     public void configWidgets(final int vid) {
+
+        Log.i(Utils.MUXI_TAG, "Configure widgets");
 
         switch (vid){
             case R.id.txt_info_name:
@@ -91,6 +99,8 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
     }
 
     public Fruit getFruit(){
+        Log.i(Utils.MUXI_TAG, "Retrieve fruit that was clicked on list.");
+
         Intent intent = getIntent();
         Bundle extra = intent.getExtras();
 

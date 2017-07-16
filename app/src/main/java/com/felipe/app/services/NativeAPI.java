@@ -21,7 +21,6 @@ import io.reactivex.Observable;
 public class NativeAPI {
 
     private final static String LIB_NAME = "native-lib";
-    private Double convertedValue;
     private Context ctx;
     private int position;
 
@@ -48,6 +47,7 @@ public class NativeAPI {
     }
 
     public void setCurrentPosition(int pos){
+        Log.i(Utils.MUXI_TAG, "Set position for adapter know what position needed to be updated");
         this.position = pos;
     }
 

@@ -12,6 +12,9 @@ import com.felipe.app.modules.ApplicationModule;
 
 public class CustomApplication extends Application {
 
+    /*
+    *  Custom application that join all modules and provide them all application
+    * */
     private ApplicationComponent applicationComponentInstance;
 
     @Override

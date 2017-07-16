@@ -1,10 +1,6 @@
 package com.felipe.app.components;
 
-import android.content.Context;
-
 import com.felipe.app.FruitsActivity;
-import com.felipe.app.adapters.FruitAdapter;
-import com.felipe.app.adapters.FruitViewHolder;
 import com.felipe.app.modules.ApplicationModule;
 
 import javax.inject.Singleton;
@@ -18,5 +14,9 @@ import dagger.Component;
 @Singleton
 @Component( modules = { ApplicationModule.class })
 public interface ApplicationComponent {
+
+    /*
+    *  Component injector
+    * */
     void inject(FruitsActivity activity);
 }
