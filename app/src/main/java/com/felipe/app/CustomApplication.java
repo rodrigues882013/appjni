@@ -2,11 +2,9 @@ package com.felipe.app;
 
 import android.app.Application;
 
-import com.felipe.app.components.DaggerNetworkComponent;
-import com.felipe.app.components.NetworkComponent;
-import com.felipe.app.modules.AppModule;
-import com.felipe.app.modules.NativeModule;
-import com.felipe.app.modules.NetworkModule;
+import com.felipe.app.components.ApplicationComponent;
+import com.felipe.app.components.DaggerApplicationComponent;
+import com.felipe.app.modules.ApplicationModule;
 
 /**
  * Created by felipe on 7/15/17.
@@ -14,8 +12,7 @@ import com.felipe.app.modules.NetworkModule;
 
 public class CustomApplication extends Application {
 
-    private NetworkComponent networkComponentInstance;
-//    private NativeComponent nativeComponentInstance;
+    private ApplicationComponent applicationComponentInstance;
 
     @Override
     public void onCreate() {
@@ -24,25 +21,14 @@ public class CustomApplication extends Application {
     }
 
     private void init(){
-        networkComponentInstance = DaggerNetworkComponent
+        applicationComponentInstance = DaggerApplicationComponent
                 .builder()
-                .networkModule(new NetworkModule())
+                .applicationModule(new ApplicationModule())
                 .build();
-
-//        nativeComponentInstance = DaggerNativeComponent
-//                .builder()
-//                .nativeModule(new NativeModule())
-//                .build();
     }
 
-    public NetworkComponent getNetworkComponent(){
-        return networkComponentInstance;
+    public ApplicationComponent getNetworkComponent(){
+        return applicationComponentInstance;
 
     }
-
-//    public NativeComponent getNativeComponent(){
-//        return nativeComponentInstance;
-//
-//    }
-
 }

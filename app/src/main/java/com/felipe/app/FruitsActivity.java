@@ -10,10 +10,8 @@ import android.widget.ProgressBar;
 import com.felipe.app.adapters.FruitAdapter;
 import com.felipe.app.models.pojos.Fruit;
 import com.felipe.app.models.schemas.FruitsJSON;
-//import com.felipe.app.services.NativeClient;
-import com.felipe.app.services.NativeClient;
-import com.felipe.app.services.RestClient;
 import com.felipe.app.services.FruitService;
+import com.felipe.app.services.NativeClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +23,8 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+
+//import com.felipe.app.services.NativeClient;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -54,7 +54,6 @@ public class FruitsActivity extends BaseActivity implements ActivityAction {
         setContentView(R.layout.activity_fruits);
 
         ((CustomApplication)getApplication()).getNetworkComponent().inject(this);
-        //((CustomApplication)getApplication()).getNativeComponent().inject(this);
 
         onConfigure();
         getFruits();

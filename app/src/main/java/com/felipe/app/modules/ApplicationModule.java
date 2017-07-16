@@ -17,12 +17,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 @Module
-public class NetworkModule {
+public class ApplicationModule {
 
-    public NetworkModule() {
+    public ApplicationModule() {
     }
 
-    @Provides @Named("retrofit")
+    @Provides
+    @Named("retrofit")
     @Singleton
     Retrofit provideRetrofit(){
         return new Retrofit.Builder()
@@ -32,7 +33,8 @@ public class NetworkModule {
                 .build();
     }
 
-    @Provides @Named("native")
+    @Provides
+    @Named("native")
     @Singleton
     NativeClient provideNative(){
         return new NativeClient();
