@@ -60,7 +60,7 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
                 break;
             case R.id.txt_info_price:
                 TextView txtPrice = (TextView) findViewById(vid);
-                txtPrice.setText(String.format(Locale.UK, "R$ " + "%,.2f",  fruit.getPrice()));
+                txtPrice.setText(String.format(Locale.UK, "U$ " + "%,.2f",  fruit.getPrice()));
                 break;
 
             case R.id.img_fruit_image:
@@ -75,9 +75,9 @@ public class FruitDetailActivity extends BaseActivity implements ActivityAction 
         Bundle extra = intent.getExtras();
 
         Fruit fruit = new Fruit();
-        fruit.setName(extra.getString("fruitName"));
-        fruit.setImage(extra.getString("fruitImage"));
-        fruit.setPrice(extra.getDouble("fruitPrice"));
+        fruit.setName(extra.getString("name"));
+        fruit.setImage(extra.getString("image"));
+        fruit.setPrice(extra.getDouble("price"));
 
         return fruit;
     }

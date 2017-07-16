@@ -21,6 +21,8 @@ public class Fruit {
     @Expose
     private Double price;
 
+    private Double priceReal;
+
     public Fruit(String name, String image, Double price) {
         this.name = name;
         this.image = image;
@@ -28,6 +30,14 @@ public class Fruit {
     }
 
     public Fruit() {
+    }
+
+    public Double getPriceReal() {
+        return priceReal;
+    }
+
+    public void setPriceReal(Double priceReal) {
+        this.priceReal = priceReal;
     }
 
     public String getName() {

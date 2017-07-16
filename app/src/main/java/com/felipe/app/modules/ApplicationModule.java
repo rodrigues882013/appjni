@@ -1,6 +1,6 @@
 package com.felipe.app.modules;
 
-import com.felipe.app.services.NativeClient;
+import com.felipe.app.services.NativeAPI;
 import com.felipe.app.utils.Utils;
 
 import javax.inject.Named;
@@ -36,8 +36,8 @@ public class ApplicationModule {
     @Provides
     @Named("native")
     @Singleton
-    NativeClient provideNative(){
-        return new NativeClient();
+    NativeAPI provideNative(){
+        return new NativeAPI();
     }
 
 }

@@ -10,7 +10,7 @@ extern "C" {
 #define APP_NATIVE_LIB_H
 
 JNIEXPORT void JNICALL
-Java_com_felipe_app_services_NativeClient_asyncConvertToReal(JNIEnv *, jobject, jdouble);
+Java_com_felipe_app_services_NativeAPI_asyncConvertToReal(JNIEnv *, jobject, jdouble, jint);
 
 #endif //APP_NATIVE_LIB_H
 

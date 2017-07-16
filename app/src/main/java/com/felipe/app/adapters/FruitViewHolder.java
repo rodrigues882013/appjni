@@ -20,7 +20,8 @@ import java.util.ArrayList;
 public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     private TextView txtName;
-    private TextView txtPrice;
+    private TextView txtPriceDollar;
+    private TextView txtPriceReal;
     private ImageView nImg;
     private CustomAdapter<Fruit> adapter;
 
@@ -32,7 +33,8 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     private void config(){
         configWidgets(R.id.txt_name, itemView);
-        configWidgets(R.id.txt_price, itemView);
+        configWidgets(R.id.txt_price_dollar, itemView);
+        configWidgets(R.id.txt_price_real, itemView);
     }
 
     private void configWidgets(final int vid, View v) {
@@ -40,8 +42,11 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
             case R.id.txt_name:
                 txtName = (TextView) v.findViewById(vid);
                 break;
-            case R.id.txt_price:
-                txtPrice = (TextView) v.findViewById(vid);
+            case R.id.txt_price_dollar:
+                txtPriceDollar = (TextView) v.findViewById(vid);
+                break;
+            case R.id.txt_price_real:
+                txtPriceReal = (TextView) v.findViewById(vid);
                 break;
             case R.id.img_fruit_image:
                 nImg = (ImageView) v.findViewById(vid);
@@ -53,9 +58,14 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
         return txtName;
     }
 
-    public TextView getTxtPrice() {
-        return txtPrice;
+    public TextView getTxtPriceDollar() {
+        return txtPriceDollar;
     }
+
+    public TextView getTxtPriceReal() {
+        return txtPriceReal;
+    }
+
 
     public void setAdapter(CustomAdapter<Fruit> adapter){
         this.adapter = adapter;
@@ -69,9 +79,10 @@ public class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnC
         FruitsActivity activity = (FruitsActivity) v.getContext();
         Intent intent = new Intent(activity, FruitDetailActivity.class);
 
-        intent.putExtra("fruitName", fruit.getName());
-        intent.putExtra("fruitPrice", fruit.getPrice());
-        intent.putExtra("fruitImage", fruit.getImage());
+        intent.putExtra("name", fruit.getName());
+        intent.putExtra("price", fruit.getPrice());
+        intent.putExtra("priceReal", fruit.getPriceReal());
+        intent.putExtra("image", fruit.getImage());
         activity.startActivity(intent);
     }
 }

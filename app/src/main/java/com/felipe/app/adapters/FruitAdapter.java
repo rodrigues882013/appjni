@@ -16,9 +16,10 @@ import java.util.Locale;
  * Created by felipe on 7/11/17.
  */
 
-public class FruitAdapter extends CustomAdapter<Fruit> {
+public class FruitAdapter extends CustomAdapter<Fruit>{
 
-    List<Fruit> items;
+    private List<Fruit> items;
+    private FruitViewHolder holder;
 
     public FruitAdapter(Activity activity, List<Fruit> items) {
         super(activity, items);
@@ -34,14 +35,15 @@ public class FruitAdapter extends CustomAdapter<Fruit> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
-        FruitViewHolder holder = (FruitViewHolder) viewHolder;
+        holder = (FruitViewHolder) viewHolder;
         holder.setAdapter(this);
-        Fruit f  = (Fruit) this.items.get(position) ;
+        Fruit f  = (Fruit) this.items.get(position);
 
         holder.getTxtName().setText(f.getName());
-        holder.getTxtPrice().setText(String.format(Locale.UK, "R$ " + "%,.2f",  f.getPrice()));
-
+        holder.getTxtPriceDollar().setText(String.format(Locale.UK, "U$ " + "%,.2f",  f.getPrice()));
+        holder.getTxtPriceReal().setText(String.format(Locale.UK, "R$ " + "%,.2f",  f.getPriceReal()));
     }
+
+
 
 }
