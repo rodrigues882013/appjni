@@ -1,4 +1,4 @@
-# MUXI Challenger  #
+# A simple JNI study case  #
 
 MUXI Android App
 
